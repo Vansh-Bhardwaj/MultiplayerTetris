@@ -22,6 +22,9 @@ public:
     int getHeight() const {
         return height;
     }
+    sf::Vector2f getPosition() const {
+        return position;
+    }
 
     Board(int width = DEFAULT_WIDTH, int height = DEFAULT_HEIGHT); // Default values can be used
     bool isGameOver() const;
@@ -33,6 +36,8 @@ public:
     int clearRows();
     bool isCollision(const Tetromino& tetromino) const;
     void draw(sf::RenderWindow& window) const;
+    void setPosition(const sf::Vector2f& newPosition) {
+    position = newPosition;}
     
 
 private:
@@ -42,6 +47,7 @@ private:
     void shiftRowsDownFrom(int startY);
     int rowsCleared = 0;
     int score = 0; 
+    sf::Vector2f position;
 };
 
 #endif // BOARD_HPP

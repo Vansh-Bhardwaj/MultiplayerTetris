@@ -58,18 +58,20 @@ const std::vector<std::vector<std::vector<int>>> Tetromino::tetrominoShapes = {
 
 Tetromino::Tetromino(TetrominoType type) : type(type), position(4, 0), rotation(0) {shape = tetrominoShapes[static_cast<int>(type)];}
 
-void Tetromino::draw(sf::RenderWindow& window) {
+void Tetromino::draw(sf::RenderWindow& window, const sf::Vector2f& boardPosition) {
     for (int y = 0; y < 4; y++) {
         for (int x = 0; x < 4; x++) {
-            if (shape[y][x] == 1) {  // Use the shape variable here
+            if (shape[y][x] == 1) {
                 sf::RectangleShape rect(sf::Vector2f(Board::CELL_SIZE, Board::CELL_SIZE));
                 rect.setFillColor(getColor(type));
-                rect.setPosition((position.x + x) * 20, (position.y + y) * 20);  // Adjust with block's position
+                rect.setPosition(boardPosition.x + (position.x + x) * Board::CELL_SIZE, 
+                                 boardPosition.y + (position.y + y) * Board::CELL_SIZE);
                 window.draw(rect);
             }
         }
     }
 }
+
 
 
 std::vector<std::vector<int>> Tetromino::rotateMatrixClockwise(const std::vector<std::vector<int>>& matrix) {
@@ -127,8 +129,8 @@ sf::Color Tetromino::getColor(TetrominoType type) {
         case TetrominoType::S: return sf::Color::Green;
         case TetrominoType::T: return sf::Color::Magenta;
         case TetrominoType::Z: return sf::Color::Red;
-        default: return sf::Color::Black;  // Shouldn't happen
+        default: return sf::Color::Black;  
     }
 }
 
-// Implement other member functions as needed...
+

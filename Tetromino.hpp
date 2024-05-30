@@ -6,15 +6,14 @@ class Board;
 
 class Tetromino {
 public:
-    // Define the different types of tetrominoes
+    
     enum class TetrominoType {
         I, J, L, O, S, T, Z
     };
 
     Tetromino(TetrominoType type);
 
-    // Draw the tetromino on the given window
-    void draw(sf::RenderWindow& window);
+    void draw(sf::RenderWindow& window, const sf::Vector2f& boardPosition);
 
     void rotateClockwise(Board& board);
 
